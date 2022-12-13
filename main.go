@@ -15,11 +15,21 @@ func main() {
 			Version: pulumi.String("1.25.4-do.0"),
 			NodePool: &digitalocean.KubernetesClusterNodePoolArgs{
 				Name:      pulumi.String("my-cluster-pool"),
-				MinNodes:  pulumi.Int(1),
-				MaxNodes:  pulumi.Int(1),
+				NodeCount: pulumi.Int(1),
 				AutoScale: pulumi.Bool(false),
 				Size:      pulumi.String("s-2vcpu-4gb"),
 			},
+		})
+		if err != nil {
+			return err
+		}
+
+		_, err = digitalocean.NewKubernetesNodePool(ctx, "my-cluster-pool", &digitalocean.KubernetesNodePoolArgs{
+			ClusterId: cluster.ID(),
+			Name:      pulumi.String("my-cluster-pool"),
+			NodeCount: pulumi.Int(1),
+			AutoScale: pulumi.Bool(false),
+			Size:      pulumi.String("s-2vcpu-4gb"),
 		})
 		if err != nil {
 			return err
