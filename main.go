@@ -14,7 +14,7 @@ func main() {
 			Region:  pulumi.String("fra1"),
 			Version: pulumi.String("1.25.4-do.0"),
 			NodePool: &digitalocean.KubernetesClusterNodePoolArgs{
-				Name:      pulumi.String("my-cluster-pool"),
+				Name:      pulumi.String("default"),
 				NodeCount: pulumi.Int(1),
 				AutoScale: pulumi.Bool(false),
 				Size:      pulumi.String("s-2vcpu-4gb"),
